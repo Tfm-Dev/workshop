@@ -30,11 +30,11 @@ public class SellerDaoJDBC implements SellerDao {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                "INSERT INTO seller"
-                + " (Name, Email, BirthDate, BaseSalary, DepartmentId)"
-                + " VALUES"
-                + " (?, ?, ?, ?, ?)",
-                Statement.RETURN_GENERATED_KEYS);
+                    "INSERT INTO seller"
+                            + " (Name, Email, BirthDate, BaseSalary, DepartmentId)"
+                            + " VALUES"
+                            + " (?, ?, ?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS);
             st.setString(1, obj.getName());
             st.setString(2, obj.getEmail());
             st.setDate(3, new Date(obj.getBirthDate().getTime()));
@@ -63,9 +63,9 @@ public class SellerDaoJDBC implements SellerDao {
         PreparedStatement st = null;
         try {
             st = conn.prepareStatement(
-                "UPDATE seller"
-                + " SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ?"
-                + " WHERE Id = ?");
+                    "UPDATE seller"
+                            + " SET Name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ?"
+                            + " WHERE Id = ?");
             st.setString(1, obj.getName());
             st.setString(2, obj.getEmail());
             st.setDate(3, new Date(obj.getBirthDate().getTime()));
@@ -101,10 +101,10 @@ public class SellerDaoJDBC implements SellerDao {
         try {
             st = conn.prepareStatement(
                     "SELECT seller.*, department.Name as DepName "
-                    + "FROM seller INNER JOIN department "
-                    + "ON seller.DepartmentId = department.Id " 
-                    + "WHERE seller.Id = ?");
-                    
+                            + "FROM seller INNER JOIN department "
+                            + "ON seller.DepartmentId = department.Id "
+                            + "WHERE seller.Id = ?");
+
             st.setInt(1, id);
             rs = st.executeQuery();
             if (rs.next()) {
@@ -145,15 +145,15 @@ public class SellerDaoJDBC implements SellerDao {
         try {
             st = conn.prepareStatement(
                     "SELECT seller.*, department.Name as DepName "
-                    + "FROM seller INNER JOIN department "
-                    + "ON seller.DepartmentId = department.Id " 
-                    + "ORDER BY Name");
+                            + "FROM seller INNER JOIN department "
+                            + "ON seller.DepartmentId = department.Id "
+                            + "ORDER BY Name");
             rs = st.executeQuery();
             List<Seller> sellers = new ArrayList<>();
             Map<Integer, Department> map = new HashMap<>();
             while (rs.next()) {
                 Department dep = map.get(rs.getInt("DepartmentId"));
-                if (dep == null) { 
+                if (dep == null) {
                     dep = instantiateDepartment(rs);
                     map.put(rs.getInt("DepartmentId"), dep);
                 }
@@ -175,18 +175,18 @@ public class SellerDaoJDBC implements SellerDao {
         try {
             st = conn.prepareStatement(
                     "SELECT seller.*, department.Name as DepName "
-                    + "FROM seller INNER JOIN department "
-                    + "ON seller.DepartmentId = department.Id " 
-                    + "WHERE DepartmentId = ? "
-                    + "ORDER BY Name");
-                    
+                            + "FROM seller INNER JOIN department "
+                            + "ON seller.DepartmentId = department.Id "
+                            + "WHERE DepartmentId = ? "
+                            + "ORDER BY Name");
+
             st.setInt(1, department.getId());
             rs = st.executeQuery();
             List<Seller> sellers = new ArrayList<>();
             Map<Integer, Department> map = new HashMap<>();
             while (rs.next()) {
                 Department dep = map.get(rs.getInt("DepartmentId"));
-                if (dep == null) { 
+                if (dep == null) {
                     dep = instantiateDepartment(rs);
                     map.put(rs.getInt("DepartmentId"), dep);
                 }

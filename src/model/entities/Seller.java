@@ -3,7 +3,7 @@ package model.entities;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Seller implements Serializable{
+public class Seller implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -15,16 +15,9 @@ public class Seller implements Serializable{
 
     private Department department;
 
-    public Seller() { }
+    public Seller() {
+    }
 
-    /**
-     * @param id
-     * @param name
-     * @param email
-     * @param birthDate
-     * @param baseSalary
-     * @param department
-     */
     public Seller(Integer id, String name, String email, Date birthDate, Double baseSalary, Department department) {
         this.id = id;
         this.name = name;
@@ -34,94 +27,54 @@ public class Seller implements Serializable{
         this.department = department;
     }
 
-    /**
-     * @return the id
-     */
     public Integer getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     * @return the name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name to set
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the email
-     */
     public String getEmail() {
         return email;
     }
 
-    /**
-     * @param email the email to set
-     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    /**
-     * @return the birthDate
-     */
     public Date getBirthDate() {
         return birthDate;
     }
 
-    /**
-     * @param birthDate the birthDate to set
-     */
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
-    /**
-     * @return the baseSalary
-     */
     public Double getBaseSalary() {
         return baseSalary;
     }
 
-    /**
-     * @param baseSalary the baseSalary to set
-     */
     public void setBaseSalary(Double baseSalary) {
         this.baseSalary = baseSalary;
     }
 
-    /**
-     * @return the department
-     */
     public Department getDepartment() {
         return department;
     }
 
-    /**
-     * @param department the department to set
-     */
     public void setDepartment(Department department) {
         this.department = department;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -130,10 +83,6 @@ public class Seller implements Serializable{
         return result;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -151,13 +100,9 @@ public class Seller implements Serializable{
         return true;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    
     @Override
     public String toString() {
-        return "Seller [id=" + id + ", name=" + name + ", email=" + email + ", birthDate=" 
+        return "Seller [id=" + id + ", name=" + name + ", email=" + email + ", birthDate="
                 + birthDate + ", baseSalary=" + baseSalary + ", department=" + department + "]";
     }
 }

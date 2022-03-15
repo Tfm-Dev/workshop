@@ -28,7 +28,7 @@ public class DepartmentFormController implements Initializable {
     private Department entity;
 
     private DepartmentService service;
-    
+
     private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 
     @FXML
@@ -60,8 +60,10 @@ public class DepartmentFormController implements Initializable {
 
     @FXML
     public void onBtSaveAction(ActionEvent event) {
-        if (entity == null) throw new IllegalStateException("Entity was null");
-        if (service == null) throw new IllegalStateException("Service was null");
+        if (entity == null)
+            throw new IllegalStateException("Entity was null");
+        if (service == null)
+            throw new IllegalStateException("Service was null");
         try {
             entity = getFormData();
             service.saveOrUpdate(entity);
@@ -84,9 +86,11 @@ public class DepartmentFormController implements Initializable {
         Department obj = new Department();
         ValidationException exception = new ValidationException("Validation error");
         obj.setId(Utils.tryParseToInt(txtId.getText()));
-        if (txtName.getText() == null || txtName.getText().trim().equals("")) exception.addError("Name", "Field can't be empty");
+        if (txtName.getText() == null || txtName.getText().trim().equals(""))
+            exception.addError("Name", "Field can't be empty");
         obj.setName(txtName.getText());
-        if (exception.getErrors().size() > 0) throw exception;
+        if (exception.getErrors().size() > 0)
+            throw exception;
         return obj;
     }
 
@@ -99,20 +103,22 @@ public class DepartmentFormController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         initializeNodes();
     }
-    
+
     private void initializeNodes() {
         Constraints.setTextFieldInteger(txtId);
         Constraints.setTextFieldMaxLength(txtName, 30);
     }
 
     public void updateFormData() {
-        if (entity == null) throw new IllegalStateException("Entity was null");
+        if (entity == null)
+            throw new IllegalStateException("Entity was null");
         txtId.setText(String.valueOf(entity.getId()));
         txtName.setText(entity.getName());
     }
 
     private void setErrorMessages(Map<String, String> errors) {
         Set<String> fields = errors.keySet();
-        if (fields.contains("Name")) labelErrorName.setText(errors.get("Name"));
+        if (fields.contains("Name"))
+            labelErrorName.setText(errors.get("Name"));
     }
 }

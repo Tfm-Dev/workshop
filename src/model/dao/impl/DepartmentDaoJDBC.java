@@ -10,6 +10,7 @@ import java.util.List;
 
 import db.DB;
 import db.DbException;
+import db.DbIntegrityException;
 import model.dao.DepartmentDao;
 import model.entities.Department;
 
@@ -27,15 +28,16 @@ public class DepartmentDaoJDBC implements DepartmentDao {
         try {
             st = conn.prepareStatement(
                     "INSERT INTO department"
-                    + " (Name)"
-                    + " VALUES"
-                    + " (?)",
+                            + " (Name)"
+                            + " VALUES"
+                            + " (?)",
                     Statement.RETURN_GENERATED_KEYS);
             st.setString(1, obj.getName());
             int rowsAffected = st.executeUpdate();
             if (rowsAffected > 0) {
                 ResultSet rs = st.getGeneratedKeys();
-                if (rs.next()) obj.setId(rs.getInt(1));
+                if (rs.next())
+                    obj.setId(rs.getInt(1));
                 DB.closeResultSet(rs);
             }
         } catch (SQLException e) {
@@ -68,7 +70,7 @@ public class DepartmentDaoJDBC implements DepartmentDao {
             st.setInt(1, id);
             st.executeUpdate();
         } catch (SQLException e) {
-            throw new DbException(e.getMessage());
+            throw new DbIntegrityException(e.getMessage());
         } finally {
             DB.closeStatement(st);
         }
@@ -117,5 +119,5 @@ public class DepartmentDaoJDBC implements DepartmentDao {
             DB.closeStatement(st);
         }
     }
-    
+
 }

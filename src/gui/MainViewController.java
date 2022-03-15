@@ -44,7 +44,8 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void onMenuItemAboutAction() {
-        loadView("/gui/About.fxml", x -> {});
+        loadView("/gui/About.fxml", x -> {
+        });
     }
 
     @Override
@@ -56,7 +57,7 @@ public class MainViewController implements Initializable {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             VBox vBox = loader.load();
-            
+
             Scene mainScene = Main.getMainScene();
             VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
 

@@ -53,16 +53,21 @@ public class MainViewController implements Initializable {
 
     private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
         try {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             VBox vBox = loader.load();
+            
             Scene mainScene = Main.getMainScene();
             VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
+
             Node mainMenu = mainVBox.getChildren().get(0);
             mainVBox.getChildren().clear();
             mainVBox.getChildren().add(mainMenu);
             mainVBox.getChildren().addAll(vBox.getChildren());
+
             T controller = loader.getController();
             initializingAction.accept(controller);
+
         } catch (IOException e) {
             Alerts.showAlert("IOException", "Error loading view", e.getMessage(), AlertType.ERROR);
         }

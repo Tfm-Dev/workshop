@@ -61,7 +61,6 @@ public class DepartmentListController implements Initializable {
     private void initializeNodes() {
         tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-
         Stage stage = (Stage) Main.getMainScene().getWindow();
         tableViewDepartment.prefHeightProperty().bind(stage.heightProperty());
     }
@@ -75,11 +74,15 @@ public class DepartmentListController implements Initializable {
     
     private void createDialogForm(Department obj, String absoluteName, Stage parentStage) {
         try {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             Pane pane = loader.load();
+
             DepartmentFormController controller = loader.getController();
             controller.setDepartment(obj);
+            controller.setDepartmentService(service);
             controller.updateFormData();
+            
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Enter Department data");
             dialogStage.setScene(new Scene(pane));
@@ -87,6 +90,7 @@ public class DepartmentListController implements Initializable {
             dialogStage.initOwner(parentStage);
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.showAndWait();
+
         } catch (IOException e) {
             Alerts.showAlert("IO Exception", "Error loading view", e.getMessage(), AlertType.ERROR);
         }
